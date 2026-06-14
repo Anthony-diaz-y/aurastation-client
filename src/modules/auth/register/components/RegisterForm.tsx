@@ -1,29 +1,29 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import SocialButtons from '@/src/shared/SocialButtons';
+import { useState } from "react";
+import Link from "next/link";
+import { useRegister } from "../hooks/useRegister"; // 1. Importas el hook
+import SocialButtons from "@/src/shared/SocialButtons";
+import { EyeOpenIcon } from "@/src/shared/icons/EyeOpenIcon";
+import { EyeClosedIcon } from "@/src/shared/icons/EyeClosedIcon";
 
 export default function RegisterForm() {
-  const router = useRouter();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const { register, isPending } = useRegister();
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-    await new Promise((r) => setTimeout(r, 1000));
-    setLoading(false);
-    router.push('/home');
+    register({ email, password });
   };
 
   return (
     <form onSubmit={handleSubmit} className="w-full flex flex-col gap-3">
       <div
         style={{
-          animation: 'fade-up 0.6s 0.25s cubic-bezier(0.16,1,0.3,1) both',
+          animation: "fade-up 0.6s 0.25s cubic-bezier(0.16,1,0.3,1) both",
           opacity: 0,
         }}
       >
@@ -40,25 +40,37 @@ export default function RegisterForm() {
 
       <div
         style={{
-          animation: 'fade-up 0.6s 0.35s cubic-bezier(0.16,1,0.3,1) both',
+          animation: "fade-up 0.6s 0.35s cubic-bezier(0.16,1,0.3,1) both",
           opacity: 0,
         }}
+        className="relative"
       >
         <input
-          type="password"
+          type={showPassword ? "text" : "password"}
           placeholder="Crear contraseña"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
           autoComplete="new-password"
-          className="w-full h-11 bg-white/15 border border-white/20 rounded-full px-5 text-sm text-white placeholder:text-white/45 outline-none focus:border-white/50 focus:bg-white/20 transition"
+          className="w-full h-11 bg-white/15 border border-white/20 rounded-full px-5 pr-12 text-sm text-white placeholder:text-white/45 outline-none focus:border-white/50 focus:bg-white/20 transition"
         />
-      </div>
 
+        <button
+          type="button"
+          onClick={() => setShowPassword(!showPassword)}
+          className="absolute right-4 top-1/2 -translate-y-1/2 text-white/50 hover:text-white/90 transition"
+        >
+          {showPassword ? (
+            <EyeOpenIcon className="w-4 h-4" />
+          ) : (
+            <EyeClosedIcon className="w-4 h-4" />
+          )}
+        </button>
+      </div>
       <div
         className="flex items-center gap-3 my-1"
         style={{
-          animation: 'fade-up 0.6s 0.45s cubic-bezier(0.16,1,0.3,1) both',
+          animation: "fade-up 0.6s 0.45s cubic-bezier(0.16,1,0.3,1) both",
           opacity: 0,
         }}
       >
@@ -69,7 +81,7 @@ export default function RegisterForm() {
 
       <div
         style={{
-          animation: 'fade-up 0.6s 0.5s cubic-bezier(0.16,1,0.3,1) both',
+          animation: "fade-up 0.6s 0.5s cubic-bezier(0.16,1,0.3,1) both",
           opacity: 0,
         }}
       >
@@ -78,22 +90,22 @@ export default function RegisterForm() {
 
       <div
         style={{
-          animation: 'fade-up 0.6s 0.55s cubic-bezier(0.16,1,0.3,1) both',
+          animation: "fade-up 0.6s 0.55s cubic-bezier(0.16,1,0.3,1) both",
           opacity: 0,
         }}
       >
         <button
           type="submit"
-          disabled={loading}
+          disabled={isPending}
           className="w-full h-11 bg-[#5ecfea] text-[#0e3a7a] font-bold text-sm rounded-full hover:bg-[#7dd8ef] active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed transition"
         >
-          {loading ? (
+          {isPending ? (
             <span className="flex items-center justify-center gap-2">
               <span className="w-4 h-4 border-2 border-[#0e3a7a]/30 border-t-[#0e3a7a] rounded-full animate-spin" />
               Creando cuenta...
             </span>
           ) : (
-            'Registrarse'
+            "Registrarse"
           )}
         </button>
       </div>
@@ -101,14 +113,14 @@ export default function RegisterForm() {
       <div
         className="w-full h-px bg-white/15 my-2"
         style={{
-          animation: 'fade-up 0.6s 0.6s cubic-bezier(0.16,1,0.3,1) both',
+          animation: "fade-up 0.6s 0.6s cubic-bezier(0.16,1,0.3,1) both",
           opacity: 0,
         }}
       />
 
       <div
         style={{
-          animation: 'fade-up 0.6s 0.65s cubic-bezier(0.16,1,0.3,1) both',
+          animation: "fade-up 0.6s 0.65s cubic-bezier(0.16,1,0.3,1) both",
           opacity: 0,
         }}
       >
