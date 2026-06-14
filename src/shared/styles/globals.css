@@ -1,0 +1,142 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────
+   KEYFRAMES — Home
+───────────────────────────────────────────── */
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-down {
+  from { opacity: 0; transform: translateY(-16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.08); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes dot-pulse {
+  0%, 100% { background: rgba(255, 255, 255, 0.3); transform: scale(1); }
+  50%       { background: rgba(94, 207, 234, 0.9);  transform: scale(1.5); }
+}
+
+@keyframes home-fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes home-chart-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes home-line-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes home-nav-in {
+  from { opacity: 0; transform: translateY(100%); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes home-dot-in {
+  from { opacity: 0; transform: scale(0.5); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes home-pulse-soft {
+  0%, 100% { box-shadow: 0 4px 16px rgba(94, 207, 234, 0.35); }
+  50%       { box-shadow: 0 6px 22px rgba(94, 207, 234, 0.55); }
+}
+
+/* Home animation utilities */
+.animate-home-chart-in    { animation: home-chart-in   0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both; }
+.animate-home-nav-in      { animation: home-nav-in     0.55s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.animate-home-pulse-soft  { animation: home-pulse-soft 2.8s  ease-in-out infinite; }
+
+/* ─────────────────────────────────────────────
+   KEYFRAMES — Midiendo screen
+───────────────────────────────────────────── */
+
+@keyframes midiendo-ring-pulse {
+  0%, 100% { box-shadow: 0 0 0 0  rgba(94, 207, 234, 0.55); }
+  50%       { box-shadow: 0 0 0 18px rgba(94, 207, 234, 0); }
+}
+
+@keyframes midiendo-dots {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+/* Midiendo animation utilities */
+.animate-midiendo-ring { animation: midiendo-ring-pulse 2.2s ease-in-out infinite; }
+.animate-midiendo-dots { animation: midiendo-dots       1.4s ease-in-out infinite; }
+
+/* ─────────────────────────────────────────────
+   KEYFRAMES — Result card
+───────────────────────────────────────────── */
+
+@keyframes face-rise {
+  from { opacity: 0; transform: translateY(36px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Result card animation utilities */
+.animate-face-rise { animation: face-rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both; }
+
+/* ─────────────────────────────────────────────
+   KEYFRAMES — Exercises Screen
+───────────────────────────────────────────── */
+
+@keyframes exercise-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes exercise-header-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Exercise animation utilities */
+.animate-exercise-header {
+  animation: exercise-header-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-exercise-card-1 {
+  animation: exercise-card-in 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+
+.animate-exercise-card-2 {
+  animation: exercise-card-in 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.22s both;
+}
+
+.animate-exercise-card-3 {
+  animation: exercise-card-in 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.34s both;
+}
+
+.animate-exercise-card-4 {
+  animation: exercise-card-in 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.46s both;
+}
+
