@@ -48,8 +48,18 @@ export function useProfile(): UseProfileReturn {
   const router = useRouter();
   const [view, setView] = useState<ViewType>("profile");
 
-  const [avatarId, setAvatarId] = useState("happy");
-  const [tempAvatarId, setTempAvatarId] = useState("happy");
+  const [avatarId, setAvatarId] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("user_avatar_id") || "happy";
+    }
+    return "happy";
+  });
+  const [tempAvatarId, setTempAvatarId] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("user_avatar_id") || "happy";
+    }
+    return "happy";
+  });
   const [name, setName] = useState("");
   const [birthdate, setBirthdate] = useState("");
   const [email, setEmail] = useState("");
@@ -65,13 +75,14 @@ export function useProfile(): UseProfileReturn {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await axios.get(`${API_URL}auth/me`, {
-          withCredentials: true,
-        });
+        const response = await axios.get(`${API_URL}auth/me`);
         const user = response.data;
         if (user) {
           setAvatarId(user.avatarId || "happy");
           setTempAvatarId(user.avatarId || "happy");
+          if (user.avatarId) {
+            localStorage.setItem("user_avatar_id", user.avatarId);
+          }
           setName(user.name || "");
           setBirthdate(user.birthdate || "");
           setEmail(user.email || "");
@@ -103,13 +114,13 @@ export function useProfile(): UseProfileReturn {
 
       await axios.patch(
         `${API_URL}users/me`,
-        { [dbField]: value },
-        { withCredentials: true },
+        { [dbField]: value }
       );
 
       switch (field) {
         case "avatar":
           setAvatarId(value);
+          localStorage.setItem("user_avatar_id", value);
           break;
         case "name":
           setName(value);
@@ -176,6 +187,7 @@ export function useProfile(): UseProfileReturn {
         console.error("Error during logout:", err);
       } finally {
         localStorage.removeItem("access_token");
+        localStorage.removeItem("user_avatar_id");
         window.location.href = "/auth/login";
       }
     },

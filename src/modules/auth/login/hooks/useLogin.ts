@@ -15,6 +15,9 @@ export function useLogin() {
       if (data.accessToken) {
         localStorage.setItem("access_token", data.accessToken);
       }
+      if (data.user?.avatarId) {
+        localStorage.setItem("user_avatar_id", data.user.avatarId);
+      }
       toast.success("¡Bienvenido! Inicio de sesión exitoso");
       router.push("/home");
     },

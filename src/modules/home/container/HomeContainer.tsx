@@ -16,17 +16,26 @@ interface UserProfile {
 }
 
 export default function HomeContainer() {
-  const [user, setUser] = useState<UserProfile | null>(null);
+  const [user, setUser] = useState<UserProfile | null>(() => {
+    if (typeof window !== "undefined") {
+      const cachedAvatar = localStorage.getItem("user_avatar_id");
+      if (cachedAvatar) {
+        return { avatarId: cachedAvatar };
+      }
+    }
+    return null;
+  });
 
   useEffect(() => {
     const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001/";
     const fetchUser = async () => {
       try {
-        const response = await axios.get(`${API_URL}auth/me`, {
-          withCredentials: true,
-        });
+        const response = await axios.get(`${API_URL}auth/me`);
         if (response.data) {
           setUser(response.data);
+          if (response.data.avatarId) {
+            localStorage.setItem("user_avatar_id", response.data.avatarId);
+          }
         }
       } catch (error) {
         console.error("Error fetching user profile in HomeContainer:", error);
