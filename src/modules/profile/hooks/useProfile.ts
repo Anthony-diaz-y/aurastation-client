@@ -179,6 +179,8 @@ export function useProfile(): UseProfileReturn {
       } catch (err) {
         console.error("Error during logout:", err);
       } finally {
+        localStorage.removeItem("access_token");
+        document.cookie = "access_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax; Secure";
         window.location.href = "/auth/login";
       }
     },
