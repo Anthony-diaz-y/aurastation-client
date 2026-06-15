@@ -21,19 +21,16 @@ export interface ProfileField {
 }
 
 export interface UseProfileReturn {
-  // Navigation
   view: ViewType;
   goToAvatarView: () => void;
   goToProfileView: () => void;
   handleBack: () => void;
   handleLogout: () => void;
 
-  // Profile data
   fields: ProfileField;
   avatarComponent: () => React.ReactElement;
   avatars: typeof PROFILE_AVATARS;
 
-  // Inline edit
   editingField: string | null;
   editValue: string;
   setEditValue: (v: string) => void;
@@ -41,7 +38,6 @@ export interface UseProfileReturn {
   cancelEditing: () => void;
   saveField: (field: string, value: string) => void;
 
-  // Temporary Avatar Selection (Aceptar/Volver flow)
   tempAvatarId: string;
   setTempAvatarId: (id: string) => void;
   tempAvatarComponent: () => React.ReactElement;
@@ -95,20 +91,20 @@ export function useProfile(): UseProfileReturn {
   const saveField = async (field: string, value: string) => {
     try {
       const fieldMap: Record<string, string> = {
-        avatar: 'avatarId',
-        name: 'name',
-        birthdate: 'birthdate',
-        email: 'email',
-        password: 'password',
-        address: 'address',
-        phone: 'phone',
+        avatar: "avatarId",
+        name: "name",
+        birthdate: "birthdate",
+        email: "email",
+        password: "password",
+        address: "address",
+        phone: "phone",
       };
       const dbField = fieldMap[field] || field;
 
       await axios.patch(
         `${API_URL}users/me`,
         { [dbField]: value },
-        { withCredentials: true }
+        { withCredentials: true },
       );
 
       switch (field) {
@@ -138,7 +134,7 @@ export function useProfile(): UseProfileReturn {
     } catch (error: any) {
       console.error("Error updating profile:", error);
       toast.error(
-        error.response?.data?.message || "Error al actualizar el perfil"
+        error.response?.data?.message || "Error al actualizar el perfil",
       );
     }
     setEditingField(null);
@@ -180,7 +176,6 @@ export function useProfile(): UseProfileReturn {
         console.error("Error during logout:", err);
       } finally {
         localStorage.removeItem("access_token");
-        document.cookie = "access_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax; Secure";
         window.location.href = "/auth/login";
       }
     },
@@ -196,7 +191,6 @@ export function useProfile(): UseProfileReturn {
     cancelEditing,
     saveField,
 
-    // Temp Avatar fields
     tempAvatarId,
     setTempAvatarId,
     tempAvatarComponent,

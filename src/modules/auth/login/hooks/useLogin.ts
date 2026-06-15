@@ -14,8 +14,6 @@ export function useLogin() {
     onSuccess: (data) => {
       if (data.accessToken) {
         localStorage.setItem("access_token", data.accessToken);
-        // Guardar también en cookie local del frontend para el middleware de Next.js
-        document.cookie = `access_token=${data.accessToken}; path=/; max-age=${7 * 24 * 60 * 60}; SameSite=Lax; Secure`;
       }
       toast.success("¡Bienvenido! Inicio de sesión exitoso");
       router.push("/home");
