@@ -21,15 +21,15 @@ export default function ResultCard({ result }: ResultCardProps) {
   } = result;
 
   return (
-    <div className="min-h-dvh" style={{ backgroundColor: bgColor }}>
+    <main className="min-h-dvh" style={{ backgroundColor: bgColor }}>
       <div
-        className="relative mx-auto flex min-h-dvh w-full max-w-105 not-even:flex-col overflow-hidden"
+        className="mx-auto flex min-h-dvh w-full max-w-lg flex-col overflow-hidden relative"
         style={{ backgroundColor: bgColor }}
         role="region"
         aria-label={`Resultado: ${label}`}
       >
-        <div className="flex flex-col px-8 pt-14">
-          <div className="mb-8 flex items-center justify-between">
+        <div className="flex flex-col px-8 pt-14 text-center items-center">
+          <div className="mb-8 flex items-center justify-between w-full">
             <span
               className="text-xs font-medium tracking-wide"
               style={{ color: textColor, opacity: 0.7 }}
@@ -69,14 +69,14 @@ export default function ResultCard({ result }: ResultCardProps) {
           </div>
 
           <h1
-            className="mb-3 text-[2rem] font-bold leading-tight tracking-tight"
+            className="mb-3 text-[2rem] font-bold leading-tight tracking-tight mt-4"
             style={{ color: textColor }}
           >
             {label}
           </h1>
 
           <p
-            className="mb-8 max-w-[26ch] text-sm leading-relaxed"
+            className="mb-8 text-sm leading-relaxed max-w-sm"
             style={{ color: textColor, opacity: 0.8 }}
           >
             {description}
@@ -121,6 +121,6 @@ export default function ResultCard({ result }: ResultCardProps) {
           />
         </div>
       </div>
-    </div>
+    </main>
   );
 }

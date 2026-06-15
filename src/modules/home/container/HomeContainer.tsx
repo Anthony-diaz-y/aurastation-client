@@ -45,8 +45,8 @@ export default function HomeContainer() {
   }, []);
 
   return (
-    <div className="min-h-dvh bg-[#e9eef6] sm:flex sm:justify-center">
-      <main className="relative flex min-h-dvh w-full max-w-105 flex-col overflow-hidden bg-white sm:shadow-[0_16px_48px_rgba(29,87,187,0.12)]">
+    <main className="relative flex min-h-dvh flex-col bg-white">
+      <div className="mx-auto flex w-full max-w-lg flex-col min-h-dvh overflow-hidden">
         <HomeHeader avatarId={user?.avatarId} />
 
         <section className="flex shrink-0 flex-col items-center bg-white px-5 pb-4 pt-4">
@@ -60,7 +60,7 @@ export default function HomeContainer() {
         </section>
 
         <BottomNav />
-      </main>
-    </div>
+      </div>
+    </main>
   );
 }

@@ -4,8 +4,8 @@ import BottomNav from "@/src/shared/BottomNav";
 
 export default function CalendarView() {
   return (
-    <div className="min-h-dvh bg-[#e9eef6] sm:flex sm:justify-center">
-      <main className="relative flex min-h-dvh w-full max-w-105 flex-col overflow-hidden bg-white sm:shadow-[0_16px_48px_rgba(29,87,187,0.12)]">
+    <main className="min-h-dvh bg-white flex flex-col">
+      <div className="mx-auto w-full max-w-lg flex flex-col min-h-dvh overflow-hidden">
         <div className="flex h-16 shrink-0 items-center justify-center border-b border-slate-100 bg-white px-5">
           <h1 className="text-lg font-bold text-slate-800">Calendario</h1>
         </div>
@@ -34,7 +34,7 @@ export default function CalendarView() {
         </div>
 
         <BottomNav />
-      </main>
-    </div>
+      </div>
+    </main>
   );
 }

@@ -51,7 +51,7 @@ export default function BottomNav() {
   const isHome = pathname === '/home';
 
   return (
-    <nav className="animate-home-nav-in absolute inset-x-0 bottom-0 rounded-t-[1.6rem] bg-[#1d57bb] px-4 pb-5 pt-3 shadow-[0_-4px_20px_rgba(29,87,187,0.28)]">
+    <nav className="animate-home-nav-in absolute bottom-0 left-0 right-0 mx-auto w-full max-w-lg rounded-t-[1.6rem] bg-[#1d57bb] px-4 pb-5 pt-3 shadow-[0_-4px_20px_rgba(29,87,187,0.28)]">
       <div className="grid grid-cols-4 items-end">
         <div className="flex justify-center">
           <NavItem

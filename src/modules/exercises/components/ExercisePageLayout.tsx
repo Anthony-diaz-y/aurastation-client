@@ -24,12 +24,12 @@ export function ExercisePageLayout({ config }: ExercisePageLayoutProps) {
   } = config;
 
   return (
-    <div
+    <main
       className="min-h-dvh transition-colors duration-300"
       style={{ backgroundColor: bgColor }}
     >
       <div
-        className="relative mx-auto flex min-h-dvh w-full max-w-105 flex-col px-6 pt-14 pb-10"
+        className="mx-auto flex min-h-dvh w-full max-w-lg flex-col px-6 pt-14 pb-10"
         style={{ backgroundColor: bgColor }}
       >
         <Link
@@ -103,6 +103,6 @@ export function ExercisePageLayout({ config }: ExercisePageLayoutProps) {
           </div>
         )}
       </div>
-    </div>
+    </main>
   );
 }

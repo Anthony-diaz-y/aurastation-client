@@ -8,10 +8,8 @@ export default function ProfileContainer() {
   const profile = useProfile();
 
   return (
-    <div className="min-h-dvh bg-[#0c5395] sm:flex sm:justify-center transition-colors duration-300">
-      <main className="relative flex min-h-dvh w-full max-w-[420px] flex-col px-6 pt-12 pb-10 overflow-x-hidden text-white">
-
-        {/* Back button */}
+    <main className="min-h-dvh bg-[#0c5395] transition-colors duration-300">
+      <div className="mx-auto flex min-h-dvh w-full max-w-lg flex-col px-6 pt-12 pb-10 overflow-x-hidden text-white">
         <button
           onClick={profile.handleBack}
           className="animate-exercise-header mb-6 flex w-fit items-center gap-2 text-xs font-semibold uppercase tracking-widest opacity-80 hover:opacity-100 transition-opacity"
@@ -45,7 +43,7 @@ export default function ProfileContainer() {
             onConfirm={profile.handleConfirmAvatar}
           />
         )}
-      </main>
-    </div>
+      </div>
+    </main>
   );
 }
