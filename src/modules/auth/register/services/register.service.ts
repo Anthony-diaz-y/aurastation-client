@@ -3,7 +3,14 @@ import axios from "axios";
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001/";
 
 export const registerService = {
-  async register(userData: { email: string; password: string }) {
+  async register(userData: {
+    name: string;
+    email: string;
+    password: string;
+    birthdate?: string;
+    address?: string;
+    phone?: string;
+  }) {
     try {
       const response = await axios.post(`${API_URL}auth/register`, userData);
       return response.data;

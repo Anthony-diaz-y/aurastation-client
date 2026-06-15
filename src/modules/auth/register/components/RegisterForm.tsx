@@ -8,19 +8,41 @@ import { EyeOpenIcon } from "@/src/shared/icons/EyeOpenIcon";
 import { EyeClosedIcon } from "@/src/shared/icons/EyeClosedIcon";
 
 export default function RegisterForm() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [birthdate, setBirthdate] = useState("");
+  const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   const { register, isPending } = useRegister();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    register({ email, password });
+    register({ name, email, password, birthdate, address, phone });
   };
 
   return (
     <form onSubmit={handleSubmit} className="w-full flex flex-col gap-3">
+      {/* Nombre */}
+      <div
+        style={{
+          animation: "fade-up 0.6s 0.2s cubic-bezier(0.16,1,0.3,1) both",
+          opacity: 0,
+        }}
+      >
+        <input
+          type="text"
+          placeholder="Nombre completo"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+          className="w-full h-11 bg-white/15 border border-white/20 rounded-full px-5 text-sm text-white placeholder:text-white/45 outline-none focus:border-white/50 focus:bg-white/20 transition"
+        />
+      </div>
+
+      {/* Email */}
       <div
         style={{
           animation: "fade-up 0.6s 0.25s cubic-bezier(0.16,1,0.3,1) both",
@@ -38,9 +60,10 @@ export default function RegisterForm() {
         />
       </div>
 
+      {/* Contraseña */}
       <div
         style={{
-          animation: "fade-up 0.6s 0.35s cubic-bezier(0.16,1,0.3,1) both",
+          animation: "fade-up 0.6s 0.3s cubic-bezier(0.16,1,0.3,1) both",
           opacity: 0,
         }}
         className="relative"
@@ -67,10 +90,59 @@ export default function RegisterForm() {
           )}
         </button>
       </div>
+
+      {/* Fecha de nacimiento */}
+      <div
+        style={{
+          animation: "fade-up 0.6s 0.35s cubic-bezier(0.16,1,0.3,1) both",
+          opacity: 0,
+        }}
+      >
+        <input
+          type="text"
+          placeholder="Fecha de nacimiento (ej: 15/08/1995)"
+          value={birthdate}
+          onChange={(e) => setBirthdate(e.target.value)}
+          className="w-full h-11 bg-white/15 border border-white/20 rounded-full px-5 text-sm text-white placeholder:text-white/45 outline-none focus:border-white/50 focus:bg-white/20 transition"
+        />
+      </div>
+
+      {/* Dirección */}
+      <div
+        style={{
+          animation: "fade-up 0.6s 0.4s cubic-bezier(0.16,1,0.3,1) both",
+          opacity: 0,
+        }}
+      >
+        <input
+          type="text"
+          placeholder="Dirección"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+          className="w-full h-11 bg-white/15 border border-white/20 rounded-full px-5 text-sm text-white placeholder:text-white/45 outline-none focus:border-white/50 focus:bg-white/20 transition"
+        />
+      </div>
+
+      {/* Teléfono */}
+      <div
+        style={{
+          animation: "fade-up 0.6s 0.45s cubic-bezier(0.16,1,0.3,1) both",
+          opacity: 0,
+        }}
+      >
+        <input
+          type="text"
+          placeholder="Teléfono"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          className="w-full h-11 bg-white/15 border border-white/20 rounded-full px-5 text-sm text-white placeholder:text-white/45 outline-none focus:border-white/50 focus:bg-white/20 transition"
+        />
+      </div>
+
       <div
         className="flex items-center gap-3 my-1"
         style={{
-          animation: "fade-up 0.6s 0.45s cubic-bezier(0.16,1,0.3,1) both",
+          animation: "fade-up 0.6s 0.5s cubic-bezier(0.16,1,0.3,1) both",
           opacity: 0,
         }}
       >
@@ -81,7 +153,7 @@ export default function RegisterForm() {
 
       <div
         style={{
-          animation: "fade-up 0.6s 0.5s cubic-bezier(0.16,1,0.3,1) both",
+          animation: "fade-up 0.6s 0.55s cubic-bezier(0.16,1,0.3,1) both",
           opacity: 0,
         }}
       >
@@ -90,7 +162,7 @@ export default function RegisterForm() {
 
       <div
         style={{
-          animation: "fade-up 0.6s 0.55s cubic-bezier(0.16,1,0.3,1) both",
+          animation: "fade-up 0.6s 0.6s cubic-bezier(0.16,1,0.3,1) both",
           opacity: 0,
         }}
       >
@@ -113,14 +185,14 @@ export default function RegisterForm() {
       <div
         className="w-full h-px bg-white/15 my-2"
         style={{
-          animation: "fade-up 0.6s 0.6s cubic-bezier(0.16,1,0.3,1) both",
+          animation: "fade-up 0.6s 0.65s cubic-bezier(0.16,1,0.3,1) both",
           opacity: 0,
         }}
       />
 
       <div
         style={{
-          animation: "fade-up 0.6s 0.65s cubic-bezier(0.16,1,0.3,1) both",
+          animation: "fade-up 0.6s 0.7s cubic-bezier(0.16,1,0.3,1) both",
           opacity: 0,
         }}
       >

@@ -4,6 +4,9 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { PROFILE_AVATARS } from "../constants/profile.const";
+import { loginService } from "@/src/modules/auth/login/services/login.service";
+import axios from "axios";
+import { toast } from "sonner";
 
 export type ViewType = "profile" | "avatar";
 
@@ -37,6 +40,12 @@ export interface UseProfileReturn {
   startEditing: (field: string, currentValue: string) => void;
   cancelEditing: () => void;
   saveField: (field: string, value: string) => void;
+
+  // Temporary Avatar Selection (Aceptar/Volver flow)
+  tempAvatarId: string;
+  setTempAvatarId: (id: string) => void;
+  tempAvatarComponent: () => React.ReactElement;
+  handleConfirmAvatar: () => void;
 }
 
 export function useProfile(): UseProfileReturn {
@@ -44,63 +53,93 @@ export function useProfile(): UseProfileReturn {
   const [view, setView] = useState<ViewType>("profile");
 
   const [avatarId, setAvatarId] = useState("happy");
-  const [name, setName] = useState("Juan Pérez");
-  const [birthdate, setBirthdate] = useState("15/08/1995");
-  const [email, setEmail] = useState("juan.perez@email.com");
+  const [tempAvatarId, setTempAvatarId] = useState("happy");
+  const [name, setName] = useState("");
+  const [birthdate, setBirthdate] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("••••••••");
-  const [address, setAddress] = useState("Av. Larco 123, Lima");
-  const [phone, setPhone] = useState("+51 987 654 321");
+  const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState("");
 
   const [editingField, setEditingField] = useState<string | null>(null);
   const [editValue, setEditValue] = useState("");
 
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001/";
+
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    setAvatarId(localStorage.getItem("aurastation_profile_avatar") || "happy");
-    setName(localStorage.getItem("aurastation_profile_name") || "Juan Pérez");
-    setBirthdate(
-      localStorage.getItem("aurastation_profile_birthdate") || "15/08/1995",
-    );
-    setEmail(
-      localStorage.getItem("aurastation_profile_email") ||
-        "juan.perez@email.com",
-    );
-    setPassword(
-      localStorage.getItem("aurastation_profile_password") || "••••••••",
-    );
-    setAddress(
-      localStorage.getItem("aurastation_profile_address") ||
-        "Av. Larco 123, Lima",
-    );
-    setPhone(
-      localStorage.getItem("aurastation_profile_phone") || "+51 987 654 321",
-    );
+    const fetchProfile = async () => {
+      try {
+        const response = await axios.get(`${API_URL}auth/me`, {
+          withCredentials: true,
+        });
+        const user = response.data;
+        if (user) {
+          setAvatarId(user.avatarId || "happy");
+          setTempAvatarId(user.avatarId || "happy");
+          setName(user.name || "");
+          setBirthdate(user.birthdate || "");
+          setEmail(user.email || "");
+          setPassword("••••••••");
+          setAddress(user.address || "");
+          setPhone(user.phone || "");
+        }
+      } catch (error) {
+        console.error("Error fetching profile:", error);
+        toast.error("Error al cargar los datos del perfil");
+      }
+    };
+
+    fetchProfile();
   }, []);
 
-  const saveField = (field: string, value: string) => {
-    localStorage.setItem(`aurastation_profile_${field}`, value);
-    switch (field) {
-      case "avatar":
-        setAvatarId(value);
-        break;
-      case "name":
-        setName(value);
-        break;
-      case "birthdate":
-        setBirthdate(value);
-        break;
-      case "email":
-        setEmail(value);
-        break;
-      case "password":
-        setPassword(value);
-        break;
-      case "address":
-        setAddress(value);
-        break;
-      case "phone":
-        setPhone(value);
-        break;
+  const saveField = async (field: string, value: string) => {
+    try {
+      const fieldMap: Record<string, string> = {
+        avatar: 'avatarId',
+        name: 'name',
+        birthdate: 'birthdate',
+        email: 'email',
+        password: 'password',
+        address: 'address',
+        phone: 'phone',
+      };
+      const dbField = fieldMap[field] || field;
+
+      await axios.patch(
+        `${API_URL}users/me`,
+        { [dbField]: value },
+        { withCredentials: true }
+      );
+
+      switch (field) {
+        case "avatar":
+          setAvatarId(value);
+          break;
+        case "name":
+          setName(value);
+          break;
+        case "birthdate":
+          setBirthdate(value);
+          break;
+        case "email":
+          setEmail(value);
+          break;
+        case "password":
+          setPassword("••••••••");
+          break;
+        case "address":
+          setAddress(value);
+          break;
+        case "phone":
+          setPhone(value);
+          break;
+      }
+      toast.success("Perfil actualizado correctamente");
+    } catch (error: any) {
+      console.error("Error updating profile:", error);
+      toast.error(
+        error.response?.data?.message || "Error al actualizar el perfil"
+      );
     }
     setEditingField(null);
   };
@@ -116,13 +155,33 @@ export function useProfile(): UseProfileReturn {
     PROFILE_AVATARS.find((a) => a.id === avatarId) || PROFILE_AVATARS[2];
   const avatarComponent = currentAvatar.component;
 
+  const tempAvatar =
+    PROFILE_AVATARS.find((a) => a.id === tempAvatarId) || PROFILE_AVATARS[2];
+  const tempAvatarComponent = tempAvatar.component;
+
+  const handleConfirmAvatar = () => {
+    saveField("avatar", tempAvatarId);
+    setView("profile");
+  };
+
   return {
     view,
-    goToAvatarView: () => setView("avatar"),
+    goToAvatarView: () => {
+      setTempAvatarId(avatarId);
+      setView("avatar");
+    },
     goToProfileView: () => setView("profile"),
     handleBack: () =>
       view === "avatar" ? setView("profile") : router.push("/home"),
-    handleLogout: () => router.push("/auth/login"),
+    handleLogout: async () => {
+      try {
+        await loginService.logout();
+      } catch (err) {
+        console.error("Error during logout:", err);
+      } finally {
+        window.location.href = "/auth/login";
+      }
+    },
 
     fields: { avatarId, name, birthdate, email, password, address, phone },
     avatarComponent,
@@ -134,5 +193,11 @@ export function useProfile(): UseProfileReturn {
     startEditing,
     cancelEditing,
     saveField,
+
+    // Temp Avatar fields
+    tempAvatarId,
+    setTempAvatarId,
+    tempAvatarComponent,
+    handleConfirmAvatar,
   };
 }

@@ -1,19 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import { PROFILE_AVATARS } from "../../profile/constants/profile.const";
 
-function ProfileAvatar() {
-  const [avatarId, setAvatarId] = useState("happy");
-
-  useEffect(() => {
-    const saved = localStorage.getItem("aurastation_profile_avatar");
-    if (saved) {
-      setAvatarId(saved);
-    }
-  }, []);
-
+function ProfileAvatar({ avatarId = "happy" }: { avatarId?: string }) {
   const avatar =
     PROFILE_AVATARS.find((a) => a.id === avatarId) || PROFILE_AVATARS[2];
   const SvgComponent = avatar.component;
@@ -30,7 +20,11 @@ function ProfileAvatar() {
   );
 }
 
-export default function HomeHeader() {
+interface HomeHeaderProps {
+  avatarId?: string;
+}
+
+export default function HomeHeader({ avatarId }: HomeHeaderProps) {
   return (
     <header className="flex items-center justify-between bg-[#1d57bb] px-5 py-3 select-none">
       <div className="flex items-center gap-2">
@@ -60,7 +54,7 @@ export default function HomeHeader() {
         </button>
 
         <Link href="/profile">
-          <ProfileAvatar />
+          <ProfileAvatar avatarId={avatarId} />
         </Link>
       </div>
     </header>

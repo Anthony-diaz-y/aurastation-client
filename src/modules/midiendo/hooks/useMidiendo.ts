@@ -4,6 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { evaluateBpm } from "../utils/bpmEvaluator";
 import { BpmResult } from "../interfaces/midiendo.interfaces";
+import axios from "axios";
 
 const MEASURE_DURATION_MS = 9000;
 
@@ -30,6 +31,24 @@ export function useMidiendo(): UseMidiendoReturn {
     const timer = setTimeout(() => setMeasuring(false), MEASURE_DURATION_MS);
     return () => clearTimeout(timer);
   }, [bpmValue]);
+
+  useEffect(() => {
+    if (!measuring && bpmValue !== null) {
+      const saveBpm = async () => {
+        try {
+          const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001/";
+          await axios.patch(
+            `${API_URL}users/me`,
+            { lastBpm: bpmValue },
+            { withCredentials: true }
+          );
+        } catch (error) {
+          console.error("Error saving measured BPM to database:", error);
+        }
+      };
+      saveBpm();
+    }
+  }, [measuring, bpmValue]);
 
   if (bpmValue === null) {
     return { measuring: false, result: null };

@@ -38,11 +38,11 @@ export default function ProfileContainer() {
           />
         ) : (
           <AvatarSelectorView
-            selectedAvatarId={profile.fields.avatarId}
-            avatarComponent={profile.avatarComponent}
+            selectedAvatarId={profile.tempAvatarId}
+            avatarComponent={profile.tempAvatarComponent}
             avatars={profile.avatars}
-            onSelectAvatar={(id) => profile.saveField('avatar', id)}
-            onConfirm={profile.goToProfileView}
+            onSelectAvatar={profile.setTempAvatarId}
+            onConfirm={profile.handleConfirmAvatar}
           />
         )}
       </main>
