@@ -30,7 +30,7 @@ export interface ExerciseCategory {
   description: string;
   bgColor: string;
   textColor: string;
-  icon: () => React.ReactElement;
+  faceImage: string;
   href: string;
   animClass: string;
 }

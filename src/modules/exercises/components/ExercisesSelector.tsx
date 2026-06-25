@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { type ExerciseCategory } from "../interfaces/exercises.interfaces";
 
@@ -45,34 +46,35 @@ export default function ExercisesSelector({
         </p>
 
         <div className="flex flex-col gap-4">
-          {categories.map((cat) => {
-            const Icon = cat.icon;
-            return (
-              <Link
-                key={cat.id}
-                href={cat.href}
-                className={`group flex items-center justify-between p-5 rounded-3xl shadow-md border-2 border-transparent transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-white/20 active:scale-[0.98] ${cat.animClass}`}
-                style={{ backgroundColor: cat.bgColor, color: cat.textColor }}
-              >
-                <div className="flex flex-col gap-1 pr-4 max-w-[70%]">
-                  <span className="text-[10px] font-extrabold tracking-widest opacity-75 uppercase">
-                    {cat.range}
-                  </span>
-                  <h2 className="text-xl font-extrabold leading-tight">
-                    {cat.title}
-                  </h2>
-                  <p className="text-xs font-medium leading-relaxed opacity-80 mt-1">
-                    {cat.description}
-                  </p>
-                </div>
-                <div className="w-16 h-16 shrink-0 flex items-center justify-center bg-white/10 rounded-2xl p-2 group-hover:scale-105 transition-transform duration-300 overflow-hidden">
-                  <div className="w-full h-full [&>svg]:w-full [&>svg]:h-full [&>svg]:block">
-                    <Icon />
-                  </div>
-                </div>
-              </Link>
-            );
-          })}
+          {categories.map((cat) => (
+            <Link
+              key={cat.id}
+              href={cat.href}
+              className={`group relative overflow-hidden flex items-center justify-between py-6 px-5 rounded-3xl shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:ring-2 hover:ring-white/20 active:scale-[0.98] ${cat.animClass}`}
+              style={{ backgroundColor: cat.bgColor, color: cat.textColor }}
+            >
+              <div className="flex flex-col gap-1 pr-4 max-w-[62%] relative z-10">
+                <span className="text-[10px] font-extrabold tracking-widest opacity-75 uppercase">
+                  {cat.range}
+                </span>
+                <h2 className="text-xl font-extrabold leading-tight">
+                  {cat.title}
+                </h2>
+                <p className="text-xs font-medium leading-relaxed opacity-80 mt-1">
+                  {cat.description}
+                </p>
+              </div>
+              <div className="absolute right-2 -bottom-0.5 w-28.75 h-28.75 shrink-0 group-hover:scale-105 transition-transform duration-300 pointer-events-none">
+                <Image
+                  src={cat.faceImage}
+                  alt={cat.title}
+                  width={115}
+                  height={115}
+                  className="w-full h-full object-contain object-bottom"
+                />
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
     </main>

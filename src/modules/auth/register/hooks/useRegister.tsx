@@ -11,12 +11,12 @@ export function useRegister() {
   const { mutate, isPending, error } = useMutation({
     mutationFn: registerService.register,
 
-    onSuccess: (data) => {
+    onSuccess: () => {
       toast.success("¡Cuenta creada exitosamente!");
       router.push("/auth/login");
     },
 
-    onError: (error: any) => {
+    onError: (error: Error) => {
       toast.error(error.message || "Error al registrarse");
     },
   });

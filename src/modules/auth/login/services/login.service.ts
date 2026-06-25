@@ -9,9 +9,10 @@ export const loginService = {
         withCredentials: true,
       });
       return response.data;
-    } catch (error: any) {
+    } catch (error) {
+      const err = error as { response?: { data?: { message?: string } } };
       throw new Error(
-        error.response?.data?.message || "Error en el inicio de sesión",
+        err.response?.data?.message || "Error en el inicio de sesión",
       );
     }
   },
@@ -21,9 +22,10 @@ export const loginService = {
         withCredentials: true,
       });
       return response.data;
-    } catch (error: any) {
+    } catch (error) {
+      const err = error as { response?: { data?: { message?: string } } };
       throw new Error(
-        error.response?.data?.message || "Error al cerrar sesión",
+        err.response?.data?.message || "Error al cerrar sesión",
       );
     }
   },

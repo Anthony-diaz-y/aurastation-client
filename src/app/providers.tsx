@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import axios from "axios";
 
-const PUBLIC_ROUTES = ['/', '/auth/login', '/auth/register'];
+const PUBLIC_ROUTES = ['/', '/auth/login', '/auth/register', '/auth/google/callback'];
 
 if (typeof window !== "undefined") {
   axios.interceptors.request.use((config) => {

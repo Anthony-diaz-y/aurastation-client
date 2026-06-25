@@ -44,6 +44,8 @@ export interface UseProfileReturn {
   handleConfirmAvatar: () => void;
 }
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001/";
+
 export function useProfile(): UseProfileReturn {
   const router = useRouter();
   const [view, setView] = useState<ViewType>("profile");
@@ -69,8 +71,6 @@ export function useProfile(): UseProfileReturn {
 
   const [editingField, setEditingField] = useState<string | null>(null);
   const [editValue, setEditValue] = useState("");
-
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001/";
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -142,10 +142,11 @@ export function useProfile(): UseProfileReturn {
           break;
       }
       toast.success("Perfil actualizado correctamente");
-    } catch (error: any) {
+    } catch (error) {
       console.error("Error updating profile:", error);
+      const err = error as { response?: { data?: { message?: string } } };
       toast.error(
-        error.response?.data?.message || "Error al actualizar el perfil",
+        err.response?.data?.message || "Error al actualizar el perfil",
       );
     }
     setEditingField(null);

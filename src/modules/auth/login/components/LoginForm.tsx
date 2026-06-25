@@ -9,7 +9,6 @@ export default function LoginForm() {
   const { login, isPending } = useLogin();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [remember, setRemember] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

@@ -26,7 +26,7 @@ export default function MidiendoAnimation() {
         />
       </div>
 
-      <p className="animate-midiendo-dots min-w-[9ch] text-center text-lg font-bold tracking-[0.14em] text-[#5ecfea]">
+      <p className="animate-midiendo-dots min-w-[9ch] text-center text-lg font-bold tracking-[0.14em] text-white">
         MIDIENDO{DOTS[dotIdx]}
       </p>
     </main>

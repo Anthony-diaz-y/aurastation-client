@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useRegister } from "../hooks/useRegister"; // 1. Importas el hook
+import { useRegister } from "../hooks/useRegister";
 import SocialButtons from "@/src/shared/SocialButtons";
 import { EyeOpenIcon } from "@/src/shared/icons/EyeOpenIcon";
 import { EyeClosedIcon } from "@/src/shared/icons/EyeClosedIcon";

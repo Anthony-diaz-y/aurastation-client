@@ -14,9 +14,10 @@ export const registerService = {
     try {
       const response = await axios.post(`${API_URL}auth/register`, userData);
       return response.data;
-    } catch (error: any) {
+    } catch (error) {
+      const err = error as { response?: { data?: { message?: string } } };
       throw new Error(
-        error.response?.data?.message || "Error en el registro del usuario",
+        err.response?.data?.message || "Error en el registro del usuario",
       );
     }
   },

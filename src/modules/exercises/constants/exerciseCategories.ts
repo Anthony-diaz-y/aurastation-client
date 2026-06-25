@@ -1,11 +1,17 @@
-import React from 'react';
-import { doctorSvg } from '@/public/svgs/exercises/doctor';
-import { smileFaceSvg } from '@/public/svgs/exercises/smile_face';
-import { bodyTenseSvg } from '@/public/svgs/exercises/body_tense';
-import { BodyStretchSvg } from '@/public/svgs/exercises/body_stretch';
 import { ExerciseCategory } from '../interfaces/exercises.interfaces';
 
 export const EXERCISE_CATEGORIES: ExerciseCategory[] = [
+  {
+    id: 'ir-al-medico',
+    title: 'Ir al médico',
+    range: '0 – 59 BPM',
+    description: 'Tu salud es lo primero. Consulta médica recomendada por ritmo bajo.',
+    bgColor: '#5ec8e8',
+    textColor: '#ffffff',
+    faceImage: '/ir_al_medico_face.webp',
+    href: '/exercises/ir-al-medico',
+    animClass: 'animate-exercise-card-1',
+  },
   {
     id: 'calma',
     title: 'Calma',
@@ -13,9 +19,9 @@ export const EXERCISE_CATEGORIES: ExerciseCategory[] = [
     description: 'Ejercicios para mantener tu estado de equilibrio y tranquilidad.',
     bgColor: '#49ad8e',
     textColor: '#ffffff',
-    icon: smileFaceSvg,
+    faceImage: '/calma_face.webp',
     href: '/exercises/calma',
-    animClass: 'animate-exercise-card-1',
+    animClass: 'animate-exercise-card-2',
   },
   {
     id: 'estres-moderado',
@@ -24,9 +30,9 @@ export const EXERCISE_CATEGORIES: ExerciseCategory[] = [
     description: 'Ejercicios de respiración y relajación muscular progresiva.',
     bgColor: '#FFF48F',
     textColor: '#61583F',
-    icon: bodyTenseSvg,
+    faceImage: '/estres_moderado_face.webp',
     href: '/exercises/estres-moderado',
-    animClass: 'animate-exercise-card-2',
+    animClass: 'animate-exercise-card-3',
   },
   {
     id: 'estres-fuerte',
@@ -35,19 +41,8 @@ export const EXERCISE_CATEGORIES: ExerciseCategory[] = [
     description: 'Ejercicios físicos activos para canalizar y liberar tensión física.',
     bgColor: '#e8687a',
     textColor: '#ffffff',
-    icon: BodyStretchSvg,
+    faceImage: '/estres_fuerte_face.webp',
     href: '/exercises/estres-fuerte',
-    animClass: 'animate-exercise-card-3',
-  },
-  {
-    id: 'ir-al-medico',
-    title: 'Ir al médico',
-    range: '0 – 59 BPM',
-    description: 'Tu salud es lo primero. Consulta médica recomendada por ritmo bajo.',
-    bgColor: '#5ec8e8',
-    textColor: '#ffffff',
-    icon: doctorSvg,
-    href: '/exercises/ir-al-medico',
     animClass: 'animate-exercise-card-4',
   },
 ];

@@ -44,7 +44,7 @@ export function ExercisePageLayout({ config }: ExercisePageLayoutProps) {
 
         <div
           className="animate-exercise-header mb-5 flex"
-          style={{ animationDelay: "0.05s" } as any}
+          style={{ animationDelay: "0.05s" } as React.CSSProperties}
         >
           <span
             className="rounded px-4 py-1.5 text-[11px] font-extrabold uppercase tracking-[0.14em]"
@@ -56,7 +56,7 @@ export function ExercisePageLayout({ config }: ExercisePageLayoutProps) {
 
         <h1
           className="animate-exercise-header mb-8 text-[2.2rem] font-bold leading-tight tracking-tight"
-          style={{ color: textColor, animationDelay: "0.1s" } as any}
+          style={{ color: textColor, animationDelay: "0.1s" } as React.CSSProperties}
         >
           {title}
         </h1>

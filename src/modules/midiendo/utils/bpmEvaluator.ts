@@ -31,7 +31,7 @@ export function evaluateBpm(bpm: number): BpmResult {
       textColor: "#1b4332",
       buttonColor: "#ffffff",
       buttonTextColor: "#4caf93",
-      faceImage: "/calma_face.png",
+      faceImage: "/calma_face.webp",
       exercisesHref: "/exercises/calma",
       bpm,
     };
@@ -49,7 +49,7 @@ export function evaluateBpm(bpm: number): BpmResult {
       textColor: "#3d2c00",
       buttonColor: "#ffffff",
       buttonTextColor: "#d4a017",
-      faceImage: "/estres_moderado_face.png",
+      faceImage: "/estres_moderado_face.webp",
       exercisesHref: "/exercises/estres-moderado",
       bpm,
     };
@@ -66,7 +66,7 @@ export function evaluateBpm(bpm: number): BpmResult {
     textColor: "#ffffff",
     buttonColor: "#ffffff",
     buttonTextColor: "#c0392b",
-    faceImage: "/estres_fuerte_face.png",
+    faceImage: "/estres_fuerte_face.webp",
     exercisesHref: "/exercises/estres-fuerte",
     bpm,
   };

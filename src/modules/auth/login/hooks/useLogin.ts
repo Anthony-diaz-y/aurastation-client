@@ -22,7 +22,7 @@ export function useLogin() {
       router.push("/home");
     },
 
-    onError: (error: any) => {
+    onError: (error: Error) => {
       toast.error(error.message || "Credenciales incorrectas");
     },
   });
