@@ -1,62 +1,35 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import axios from "axios";
 import BottomNav from "@/src/shared/BottomNav";
+import { useCalendar } from "@/src/modules/calendar/hooks/useCalendar";
+import HomeActionsSection from "../components/HomeActionsSection";
 import HomeHeader from "../components/HomeHeader";
-import HomeLogo from "../components/HomeLogo";
-import MeasureActions from "../components/MeasureActions";
-import QuickStats from "../components/QuickStats";
 import StressCard from "../components/StressCard";
-
-interface UserProfile {
-  avatarId?: string;
-  lastBpm?: number | null;
-  streak?: number;
-}
+import { useChartData } from "../hooks/useChartData";
+import { useUserProfile } from "../hooks/useUserProfile";
 
 export default function HomeContainer() {
-  const [user, setUser] = useState<UserProfile | null>(() => {
-    if (typeof window !== "undefined") {
-      const cachedAvatar = localStorage.getItem("user_avatar_id");
-      if (cachedAvatar) {
-        return { avatarId: cachedAvatar };
-      }
-    }
-    return null;
-  });
-
-  useEffect(() => {
-    const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001/";
-    const fetchUser = async () => {
-      try {
-        const response = await axios.get(`${API_URL}auth/me`);
-        if (response.data) {
-          setUser(response.data);
-          if (response.data.avatarId) {
-            localStorage.setItem("user_avatar_id", response.data.avatarId);
-          }
-        }
-      } catch (error) {
-        console.error("Error fetching user profile in HomeContainer:", error);
-      }
-    };
-    fetchUser();
-  }, []);
+  const { user } = useUserProfile();
+  const { logs } = useCalendar();
+  const { chartData, periodLabel, latestStress } = useChartData(logs);
 
   return (
     <main className="relative flex min-h-dvh flex-col bg-white">
       <div className="mx-auto flex w-full max-w-lg flex-col min-h-dvh overflow-hidden">
         <HomeHeader avatarId={user?.avatarId} />
 
-        <section className="flex shrink-0 flex-col items-center bg-white px-5 pb-4 pt-4">
-          <HomeLogo />
-          <MeasureActions />
-          <QuickStats lastBpm={user?.lastBpm ?? null} streak={user?.streak ?? 1} />
-        </section>
+        <HomeActionsSection
+          lastBpm={user?.lastBpm ?? null}
+          streak={user?.streak ?? 1}
+        />
 
         <section className="flex min-h-0 flex-1 flex-col">
-          <StressCard className="min-h-0 flex-1" />
+          <StressCard
+            className="min-h-0 flex-1"
+            chartData={chartData}
+            periodLabel={periodLabel}
+            latestStress={latestStress}
+          />
         </section>
 
         <BottomNav />

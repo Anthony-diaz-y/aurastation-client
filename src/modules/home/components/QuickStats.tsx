@@ -1,12 +1,10 @@
+import { type QuickStatsProps } from "../interfaces/home.interfaces";
+
 export default function QuickStats({
   className = "",
   lastBpm,
   streak,
-}: {
-  className?: string;
-  lastBpm: number | null;
-  streak: number;
-}) {
+}: QuickStatsProps) {
   const dynamicStats = [
     {
       label: "Último BPM",
@@ -26,8 +24,7 @@ export default function QuickStats({
     <section
       className={`mt-4 grid w-full grid-cols-2 gap-2.5 ${className}`}
       style={{
-        animation:
-          "home-fade-up 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both",
+        animation: "home-fade-up 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both",
       }}
     >
       {dynamicStats.map((stat) => (

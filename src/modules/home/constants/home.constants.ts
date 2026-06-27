@@ -1,26 +1,46 @@
-import { LineChartPoint } from "../interfaces/home.interfaces";
+export const STRESS_LABELS: Record<string, string> = {
+  ir_al_medico: "¡Visita al médico!",
+  calma: "Calma",
+  estres_moderado: "Estrés moderado",
+  estres_fuerte: "Estrés fuerte",
+};
 
-export const defaultStressData: LineChartPoint[] = [
-  { day: 'Lu', value: 38, dot: '#facc15' },
-  { day: 'Ma', value: 28, dot: '#5ecfea' },
-  { day: 'Mi', value: 52, dot: '#22c55e' },
-  { day: 'Ju', value: 44, dot: '#facc15', active: true },
-  { day: 'Vi', value: 82, dot: '#f472b6' },
-  { day: 'Sá', value: 58, dot: '#5ecfea' },
-];
+export const DEFAULT_STRESS_LABEL = "Sin medición hoy";
+export const UNREGISTERED_STRESS_LABEL = "Sin registrar";
 
+export const WEEK_LABELS = ["Lu", "Ma", "Mi", "Ju", "Vi", "Sá", "Do"] as const;
 
-export const stats = [
-  {
-    label: 'Último BPM',
-    value: '100',
-    hint: 'Hoy',
-    accent: 'bg-[#1d57bb]/10 text-[#1d57bb]',
-  },
-  {
-    label: 'Racha',
-    value: '12',
-    hint: 'Días activos',
-    accent: 'bg-amber-50 text-amber-700',
-  },
-];
+export const MONTH_ABBR = [
+  "Ene",
+  "Feb",
+  "Mar",
+  "Abr",
+  "May",
+  "Jun",
+  "Jul",
+  "Ago",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dic",
+] as const;
+
+export const STRESS_CHART_COLORS: Record<string, string> = {
+  ir_al_medico: "#f472b6",
+  calma: "#22c55e",
+  estres_moderado: "#facc15",
+  estres_fuerte: "#f97316",
+};
+
+export const DEFAULT_CHART_COLOR = "#5ecfea";
+
+export const LINE_CHART_WIDTH = 360;
+export const LINE_CHART_HEIGHT = 88;
+export const LINE_CHART_LABEL_Y = 112;
+export const LINE_CHART_PADDING_X = 22;
+export const LINE_CHART_DEFAULT_MAX = 220;
+
+export const LOGO_BLUE_FILTER =
+  "invert(1) sepia(1) saturate(8) hue-rotate(195deg) brightness(0.85)";
+
+export const USER_AVATAR_STORAGE_KEY = "user_avatar_id";

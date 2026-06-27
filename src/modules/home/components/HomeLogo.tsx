@@ -1,13 +1,11 @@
-import Image from 'next/image';
-
-const LOGO_BLUE_FILTER =
-  'invert(1) sepia(1) saturate(8) hue-rotate(195deg) brightness(0.85)';
+import Image from "next/image";
+import { LOGO_BLUE_FILTER } from "../constants/home.constants";
 
 export default function HomeLogo() {
   return (
     <div
       className="mb-3 flex flex-col items-center"
-      style={{ animation: 'home-fade-up 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both' }}
+      style={{ animation: "home-fade-up 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both" }}
     >
       <Image
         src="/aurastation_logo.webp"

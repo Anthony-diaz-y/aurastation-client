@@ -1,10 +1,7 @@
-export type ChartPoint = {
-  x: number;
-  y: number;
-};
+import { type ChartPoint } from "../interfaces/home.interfaces";
 
 export function buildSmoothPath(points: ChartPoint[]) {
-  if (points.length < 2) return '';
+  if (points.length < 2) return "";
 
   let path = `M ${points[0].x} ${points[0].y}`;
 
