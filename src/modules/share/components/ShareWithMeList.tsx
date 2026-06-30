@@ -36,26 +36,26 @@ export default function ShareWithMeList({
           <button
             key={item.id}
             onClick={() => onViewDetail(item.id, item.user)}
-            className="w-full text-left bg-white text-slate-800 rounded-2xl p-4 shadow-md flex items-center justify-between border border-slate-100 active:scale-[0.98] transition"
+            className="w-full text-left bg-white text-slate-800 rounded-2xl p-4 shadow-md flex items-center justify-between gap-3 border border-slate-100 active:scale-[0.98] transition"
           >
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 min-w-0 flex-1">
               <UserAvatar
                 avatarId={item.user.avatarId}
-                className="w-11 h-11 rounded-xl shadow-inner"
+                className="w-11 h-11 rounded-xl shadow-inner shrink-0"
               />
-              <div>
-                <p className="font-black text-slate-800 text-sm leading-tight">
+              <div className="min-w-0 flex-1">
+                <p className="font-black text-slate-800 text-sm leading-tight truncate">
                   {item.user.name || "Usuario"}
                 </p>
-                <p className="text-[11px] text-slate-400 font-bold mt-0.5">
+                <p className="text-[11px] text-slate-400 font-bold mt-0.5 truncate">
                   {item.user.email}
                 </p>
-                <p className="text-[10px] text-[#0c5395] font-black uppercase tracking-wider mt-1.5">
+                <p className="text-[10px] text-[#0c5395] font-black uppercase tracking-wider mt-1.5 truncate">
                   {formattedDate}
                 </p>
               </div>
             </div>
-            <div className="w-8 h-8 flex items-center justify-center rounded-full bg-[#0c5395]/10 text-[#0c5395]">
+            <div className="self-center shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-[#0c5395]/10 text-[#0c5395]">
               {ChevrronRightIcon()}
             </div>
           </button>

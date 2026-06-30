@@ -59,21 +59,21 @@ export default function ShareByMeList({
         return (
           <div
             key={item.id}
-            className="bg-white text-slate-800 rounded-2xl p-4 shadow-md flex items-center justify-between border border-slate-100"
+            className="bg-white text-slate-800 rounded-2xl p-4 shadow-md flex items-center justify-between gap-3 border border-slate-100"
           >
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 min-w-0 flex-1">
               <UserAvatar
                 avatarId={item.user.avatarId}
-                className="w-11 h-11 rounded-xl shadow-inner"
+                className="w-11 h-11 rounded-xl shadow-inner shrink-0"
               />
-              <div>
-                <p className="font-black text-slate-800 text-sm leading-tight">
+              <div className="min-w-0 flex-1">
+                <p className="font-black text-slate-800 text-sm leading-tight truncate">
                   {item.user.name || "Usuario"}
                 </p>
-                <p className="text-[11px] text-slate-400 font-bold mt-0.5">
+                <p className="text-[11px] text-slate-400 font-bold mt-0.5 truncate">
                   {item.user.email}
                 </p>
-                <p className="text-[10px] text-[#36A9E1] font-black uppercase tracking-wider mt-1">
+                <p className="text-[10px] text-[#36A9E1] font-black uppercase tracking-wider mt-1 truncate">
                   {formattedDate}
                   {item.measurementInfo &&
                     ` — ${item.measurementInfo.registrationTime} (${item.measurementInfo.bpm} BPM)`}
@@ -84,7 +84,7 @@ export default function ShareByMeList({
               onClick={() =>
                 onDelete(item.id, item.user.name || item.user.email)
               }
-              className="w-9 h-9 flex items-center justify-center rounded-xl bg-red-50 text-red-400 hover:bg-red-100 transition active:scale-95 border border-red-100 shrink-0"
+              className="self-center shrink-0 w-9 h-9 flex items-center justify-center rounded-xl bg-red-50 text-red-400 hover:bg-red-100 transition active:scale-95 border border-red-100"
               aria-label="Dejar de compartir"
             >
               {TRASH_ICON}

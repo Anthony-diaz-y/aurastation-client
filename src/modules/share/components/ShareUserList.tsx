@@ -32,25 +32,25 @@ export default function ShareUserList({
         users.map((user) => (
           <div
             key={user.id}
-            className="bg-white/10 rounded-2xl p-4 flex items-center justify-between border border-white/10 hover:bg-white/15 transition"
+            className="bg-white/10 rounded-2xl p-4 flex items-center justify-between gap-3 border border-white/10 hover:bg-white/15 transition"
           >
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 min-w-0 flex-1">
               <UserAvatar
                 avatarId={user.avatarId}
-                className="w-11 h-11 rounded-xl"
+                className="w-11 h-11 rounded-xl shrink-0"
               />
-              <div>
-                <p className="font-extrabold text-sm text-white leading-tight">
+              <div className="min-w-0 flex-1">
+                <p className="font-extrabold text-sm text-white leading-tight truncate">
                   {user.name || "Usuario"}
                 </p>
-                <p className="text-[11px] text-white/55 leading-tight mt-0.5">
+                <p className="text-[11px] text-white/55 leading-tight mt-0.5 truncate">
                   {user.email}
                 </p>
               </div>
             </div>
             <button
               onClick={() => onShare(user)}
-              className="px-4 py-2 bg-[#36A9E1] hover:bg-[#2a90c7] text-white text-[11px] font-black rounded-xl uppercase tracking-wide transition active:scale-95 shadow-md shrink-0"
+              className="self-center shrink-0 px-4 py-2 bg-[#36A9E1] hover:bg-[#2a90c7] text-white text-[11px] font-black rounded-xl uppercase tracking-wide transition active:scale-95 shadow-md"
             >
               Compartir
             </button>
